@@ -11,5 +11,6 @@ declare module 'vue' {
     DarkToggle: typeof import('./components/DarkToggle.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    TheInput: typeof import('./components/TheInput.vue')['default']
   }
 }

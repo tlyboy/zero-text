@@ -1,103 +1,56 @@
-# vue-starter
+# 🕵️‍♂️ Zero Text
 
-🚀 基于 Vite + Vue 3 + TypeScript 的现代化 Vue 应用启动模板
+🕵️ 使用零宽字符将秘密藏在文字中，不留痕迹
 
-## 特性
+---
 
-- 📦 开箱即用的 Vite 配置
-- 🎨 使用 Vue 3 + TypeScript 开发
-- 🗂️ 支持自动路由与布局（基于文件系统）
-- 🪄 自动导入 API 与组件
-- 🌈 集成 Tailwind CSS，支持自定义图标
-- 🗃️ 状态管理集成 Pinia，支持持久化
-- 📱 响应式设计，支持移动端访问
-- 🚀 支持一键部署到 Netlify/Vercel/Docker
+## 🚀 项目预览
 
-## 快速开始
+👉 在线体验：[点击这里访问 Zero Text](#)
 
-1. 克隆项目：
+---
 
-   ```bash
-   git clone https://github.com/tlyboy/vue-starter.git my-new-project
-   cd my-new-project
-   ```
+## ✨ 功能特点
 
-2. 安装依赖：
+- ✅ 将任意内容（包括中文、emoji）转为零宽字符
+- ✅ 加密信息隐写到正常宿主文本中（看起来毫无异常）
+- ✅ 一键解密提取隐藏信息
+- ✅ 支持自动粘贴、复制按钮、双向交互
+- ✅ 纯前端实现，**无数据上传，安全可靠**
 
-   ```bash
-   pnpm install
-   ```
+---
 
-3. 本地开发：
+## 📦 使用方法
 
-   ```bash
-   pnpm dev
-   ```
+### 🔐 加密嵌入
 
-4. 构建生产包：
+1. 输入你想隐藏的文本（例如：`我的密码是123456`）
+2. 输入一段看似正常的“宿主文本”（例如：`你好啊，今天怎么样？`）
+3. 点击【加密嵌入】按钮
+4. 工具会在宿主文本中间插入零宽字符，生成“看不出来有信息”的文本
 
-   ```bash
-   pnpm build
-   ```
+### 🔓 解密提取
 
-## 环境要求
+1. 将包含隐藏信息的文本粘贴到“解密输入区”
+2. 点击【解密提取】
+3. 工具将还原你最初隐藏的文本内容
 
-- Node.js 22.x
-- pnpm 10.6.2 及以上
+---
 
-## 部署
+## 🧠 技术实现
 
-### Netlify 部署
+- 使用 Unicode 中的：
+  - `\u200B`（零宽空格）表示 `0`
+  - `\u200C`（零宽非连接符）表示 `1`
+- 原始文本 → UTF-8 → 二进制 → 零宽字符 → 插入宿主文本中
+- 解密时按上述流程逆推
 
-1. 将项目推送到 GitHub 仓库
-2. 在 Netlify 中导入该仓库
-3. 点击 "Deploy site" 开始部署
+---
 
-### Vercel 部署
+## 🛡️ 安全说明
 
-在 Vercel 部署时，需要配置以下环境变量：
+- 所有加密/解密操作均在本地浏览器内进行
+- 不存储、不上传任何数据
+- 信息隐写不等于加密，不建议用于敏感信息的长期保护
 
-| 环境变量                     | 值  |
-| ---------------------------- | --- |
-| ENABLE_EXPERIMENTAL_COREPACK | 1   |
-
-你可以在 Vercel 项目设置的 Environment Variables 部分进行配置。
-
-### Docker 部署
-
-使用 Docker 和 Docker Compose 快速部署：
-
-```bash
-# 克隆项目
-git clone https://github.com/tlyboy/vue-starter.git
-cd vue-starter
-
-# 使用 Docker Compose 启动
-docker compose up -d
-```
-
-服务将在 `http://localhost:80` 启动。
-
-## 目录结构
-
-```
-├── src/
-│   ├── components/    # 组件
-│   ├── layouts/       # 页面布局
-│   ├── pages/         # 页面（自动路由）
-│   ├── router/        # 路由配置
-│   ├── styles.css     # 全局样式
-│   └── main.ts        # 应用入口
-├── public/            # 静态资源
-├── package.json
-├── vite.config.ts
-├── Dockerfile
-├── compose.yaml
-├── netlify.toml
-├── vercel.json
-└── ...
-```
-
-## 使用许可
-
-[MIT](LICENSE) © Guany
+---
