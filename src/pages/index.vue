@@ -60,11 +60,17 @@ function decrypt() {
   result.value = binaryToText(binary)
 }
 
+const isCopied = ref(false)
+
 // 复制结果
 async function copyResult() {
   try {
+    isCopied.value = true
     await navigator.clipboard.writeText(result.value)
     // 这里可以添加复制成功的提示
+    setTimeout(() => {
+      isCopied.value = false
+    }, 1500)
   } catch (err) {
     console.error('复制失败:', err)
   }
@@ -116,7 +122,9 @@ async function copyResult() {
       </div>
 
       <div>
-        <button @click="copyResult" class="btn">复制</button>
+        <button @click="copyResult" class="btn" :disabled="isCopied">
+          {{ isCopied ? '已复制' : '复制' }}
+        </button>
       </div>
     </div>
   </div>
