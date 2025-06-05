@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <div class="flex-1 p-4">
+    <div class="flex-1">
       <RouterView />
     </div>
   </div>

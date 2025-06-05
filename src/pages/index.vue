@@ -110,11 +110,14 @@ async function copyResult() {
       </div>
     </div>
 
-    <div class="relative mt-4 min-h-32 rounded bg-white p-4 dark:bg-black">
-      <button @click="copyResult" class="btn absolute top-2 right-2">
-        复制
-      </button>
-      <div class="whitespace-pre-wrap">{{ result }}</div>
+    <div class="flex min-h-32 gap-4 rounded bg-white p-4 dark:bg-black">
+      <div class="flex-1">
+        {{ result }}
+      </div>
+
+      <div>
+        <button @click="copyResult" class="btn">复制</button>
+      </div>
     </div>
   </div>
 </template>
