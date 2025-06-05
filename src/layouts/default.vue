@@ -1,7 +1,7 @@
 <template>
   <div class="flex h-full flex-col">
     <div class="flex items-center justify-between bg-white p-4 dark:bg-black">
-      <div>🕵️‍♂️ Zero Text</div>
+      <div>🕵️ 零宽文本加密生成器</div>
 
       <div class="flex items-center gap-2">
         <DarkToggle />
