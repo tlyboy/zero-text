@@ -2,7 +2,8 @@
 const secretText = ref('')
 const carrierText = ref('')
 const decodeInput = ref('')
-const result = ref('')
+const encryptResult = ref('')
+const decryptResult = ref('')
 
 // 定义零宽字符映射
 const ZWC = { 0: '\u200B', 1: '\u200C' }
@@ -47,8 +48,7 @@ function encrypt() {
   const binary = textToBinary(secretText.value)
   const zwcText = binaryToZWC(binary)
   const final = insertZWCIntoCarrier(carrierText.value, zwcText)
-  result.value = final
-  decodeInput.value = final
+  encryptResult.value = final
 }
 
 // 解密方法
@@ -57,19 +57,32 @@ function decrypt() {
     .filter((c) => c === '\u200B' || c === '\u200C')
     .join('')
   const binary = zwcToBinary(zwcChars)
-  result.value = binaryToText(binary)
+  decryptResult.value = binaryToText(binary)
 }
 
-const isCopied = ref(false)
+const isEncryptCopied = ref(false)
+const isDecryptCopied = ref(false)
 
-// 复制结果
-async function copyResult() {
+// 复制加密结果
+async function copyEncryptResult() {
   try {
-    isCopied.value = true
-    await navigator.clipboard.writeText(result.value)
-    // 这里可以添加复制成功的提示
+    isEncryptCopied.value = true
+    await navigator.clipboard.writeText(encryptResult.value)
     setTimeout(() => {
-      isCopied.value = false
+      isEncryptCopied.value = false
+    }, 1500)
+  } catch (err) {
+    console.error('复制失败:', err)
+  }
+}
+
+// 复制解密结果
+async function copyDecryptResult() {
+  try {
+    isDecryptCopied.value = true
+    await navigator.clipboard.writeText(decryptResult.value)
+    setTimeout(() => {
+      isDecryptCopied.value = false
     }, 1500)
   } catch (err) {
     console.error('复制失败:', err)
@@ -78,53 +91,89 @@ async function copyResult() {
 </script>
 
 <template>
-  <div class="flex h-full flex-col gap-4 p-4">
-    <div class="flex flex-col gap-4 md:flex-row">
-      <div class="flex w-full flex-col gap-2">
-        <label class="px-2 text-sm">要隐藏的文本：</label>
-        <textarea
-          v-model="secretText"
-          class="h-32 w-full resize-none rounded bg-white p-2 outline-none dark:bg-black dark:text-white"
-          placeholder="输入要加密的内容"
-        />
+  <div
+    class="flex h-full flex-col border-t border-[#DADADA] md:flex-row dark:border-[#292929]"
+  >
+    <div
+      class="flex w-full flex-col gap-4 border-b border-[#DADADA] p-4 md:border-r md:border-b-0 dark:border-[#292929]"
+    >
+      <label class="px-2 text-sm">要隐藏的文本：</label>
+      <textarea
+        v-model="secretText"
+        class="h-32 w-full resize-none rounded bg-white p-4 outline-none dark:bg-[#2C2C2C] dark:text-white"
+        placeholder="输入要加密的内容"
+      />
 
-        <label class="px-2 text-sm">宿主文本（将信息嵌入到这里）：</label>
-        <textarea
-          v-model="carrierText"
-          class="h-32 w-full resize-none rounded bg-white p-2 outline-none dark:bg-black dark:text-white"
-          placeholder="输入一段正常文本"
-        />
+      <label class="px-2 text-sm">宿主文本（将信息嵌入到这里）：</label>
+      <textarea
+        v-model="carrierText"
+        class="h-32 w-full resize-none rounded bg-white p-4 outline-none dark:bg-[#2C2C2C] dark:text-white"
+        placeholder="输入一段正常文本"
+      />
 
-        <div>
-          <button @click="encrypt" class="btn">加密嵌入</button>
-        </div>
+      <div>
+        <button @click="encrypt" class="btn flex items-center gap-2">
+          <div class="i-carbon-locked"></div>
+          <div>加密嵌入</div>
+        </button>
       </div>
 
-      <div class="flex w-full flex-col gap-2">
-        <label class="px-2 text-sm"
-          >解密输入区（将含零宽字符的文本粘贴到这里）：</label
-        >
-        <textarea
-          v-model="decodeInput"
-          class="h-32 w-full resize-none rounded bg-white p-2 outline-none dark:bg-black dark:text-white"
-          placeholder="粘贴嵌入了零宽字符的文本"
-        />
+      <label class="px-2 text-sm">加密结果：</label>
+
+      <div class="flex min-h-32 gap-4 rounded bg-white p-4 dark:bg-[#2C2C2C]">
+        <div class="flex-1">
+          {{ encryptResult }}
+        </div>
 
         <div>
-          <button @click="decrypt" class="btn">解密提取</button>
+          <button
+            @click="copyEncryptResult"
+            class="btn flex items-center gap-2"
+            :disabled="isEncryptCopied"
+          >
+            <div class="i-carbon-copy"></div>
+            <div>{{ isEncryptCopied ? '已复制' : '复制' }}</div>
+          </button>
         </div>
       </div>
     </div>
 
-    <div class="flex min-h-32 gap-4 rounded bg-white p-4 dark:bg-black">
-      <div class="flex-1">
-        {{ result }}
-      </div>
+    <div
+      class="flex w-full flex-col gap-4 border-t border-[#DADADA] p-4 md:border-t-0 md:border-l dark:border-[#292929]"
+    >
+      <label class="px-2 text-sm"
+        >解密输入区（将含零宽字符的文本粘贴到这里）：</label
+      >
+      <textarea
+        v-model="decodeInput"
+        class="h-32 w-full resize-none rounded bg-white p-4 outline-none dark:bg-[#2C2C2C] dark:text-white"
+        placeholder="粘贴嵌入了零宽字符的文本"
+      />
 
       <div>
-        <button @click="copyResult" class="btn" :disabled="isCopied">
-          {{ isCopied ? '已复制' : '复制' }}
+        <button @click="decrypt" class="btn flex items-center gap-2">
+          <div class="i-carbon-unlocked"></div>
+          <div>解密提取</div>
         </button>
+      </div>
+
+      <label class="px-2 text-sm">解密结果：</label>
+
+      <div class="flex min-h-32 gap-4 rounded bg-white p-4 dark:bg-[#2C2C2C]">
+        <div class="flex-1">
+          {{ decryptResult }}
+        </div>
+
+        <div>
+          <button
+            @click="copyDecryptResult"
+            class="btn flex items-center gap-2"
+            :disabled="isDecryptCopied"
+          >
+            <div class="i-carbon-copy"></div>
+            <div>{{ isDecryptCopied ? '已复制' : '复制' }}</div>
+          </button>
+        </div>
       </div>
     </div>
   </div>
