@@ -92,10 +92,10 @@ async function copyDecryptResult() {
 
 <template>
   <div
-    class="flex h-full flex-col border-t border-[#DADADA] md:flex-row dark:border-[#292929]"
+    class="flex h-full flex-col overflow-y-auto border-t border-[#DADADA] md:flex-row dark:border-[#292929]"
   >
     <div
-      class="flex w-full flex-col gap-4 border-b border-[#DADADA] p-4 md:border-r md:border-b-0 dark:border-[#292929]"
+      class="flex flex-1 flex-col gap-4 border-b border-[#DADADA] p-4 md:border-r md:border-b-0 dark:border-[#292929]"
     >
       <label class="px-2 text-sm">要显示的文本：</label>
       <textarea
@@ -139,7 +139,7 @@ async function copyDecryptResult() {
     </div>
 
     <div
-      class="flex w-full flex-col gap-4 border-t border-[#DADADA] p-4 md:border-t-0 md:border-l dark:border-[#292929]"
+      class="flex flex-1 flex-col gap-4 border-t border-[#DADADA] p-4 md:border-t-0 md:border-l dark:border-[#292929]"
     >
       <label class="px-2 text-sm"
         >解密输入区（将含零宽字符的文本粘贴到这里）：</label
