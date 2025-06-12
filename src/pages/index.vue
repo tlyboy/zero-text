@@ -97,18 +97,18 @@ async function copyDecryptResult() {
     <div
       class="flex w-full flex-col gap-4 border-b border-[#DADADA] p-4 md:border-r md:border-b-0 dark:border-[#292929]"
     >
+      <label class="px-2 text-sm">要显示的文本：</label>
+      <textarea
+        v-model="carrierText"
+        class="h-32 w-full resize-none rounded bg-white p-4 outline-none dark:bg-[#2C2C2C] dark:text-white"
+        placeholder="输入要显示的文本"
+      />
+
       <label class="px-2 text-sm">要隐藏的文本：</label>
       <textarea
         v-model="secretText"
         class="h-32 w-full resize-none rounded bg-white p-4 outline-none dark:bg-[#2C2C2C] dark:text-white"
-        placeholder="输入要加密的内容"
-      />
-
-      <label class="px-2 text-sm">宿主文本（将信息嵌入到这里）：</label>
-      <textarea
-        v-model="carrierText"
-        class="h-32 w-full resize-none rounded bg-white p-4 outline-none dark:bg-[#2C2C2C] dark:text-white"
-        placeholder="输入一段正常文本"
+        placeholder="输入要隐藏的内容"
       />
 
       <div>
