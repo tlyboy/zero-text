@@ -1,20 +1,20 @@
 # Zero Text
 
-🕵️ 零宽文本加密生成器
+🕵️ Zero-width text steganography generator
 
-- ✅ 将任意内容（包括中文、emoji）转为零宽字符
-- ✅ 加密信息隐写到正常宿主文本中（看起来毫无异常）
-- ✅ 一键解密提取隐藏信息
-- ✅ 支持自动粘贴、复制按钮、双向交互
-- ✅ 纯前端实现，**无数据上传，安全可靠**
+- ✅ Convert any content (including CJK characters and emoji) to zero-width characters
+- ✅ Embed encrypted messages into normal host text (appears completely normal)
+- ✅ One-click decryption to extract hidden messages
+- ✅ Auto-paste, copy button, and bidirectional interaction
+- ✅ Pure frontend implementation, **no data upload, safe and reliable**
 
-## 安装
+## Install
 
 ```bash
 git clone https://github.com/tlyboy/zero-text.git
 ```
 
-## 使用说明
+## Usage
 
 ```bash
 pnpm install
@@ -22,28 +22,28 @@ pnpm dev
 pnpm build
 ```
 
-### 加密嵌入
+### Encrypt & Embed
 
-1. 输入你想隐藏的文本（例如：`我的密码是123456`）
-2. 输入一段看似正常的"宿主文本"（例如：`你好啊，今天怎么样？`）
-3. 点击【加密嵌入】按钮
-4. 工具会在宿主文本中间插入零宽字符，生成"看不出来有信息"的文本
+1. Enter the text you want to hide (e.g., `my password is 123456`)
+2. Enter a normal-looking "host text" (e.g., `Hello, how are you today?`)
+3. Click the **Encrypt & Embed** button
+4. The tool inserts zero-width characters into the host text, producing text that looks completely normal
 
-### 解密提取
+### Decrypt & Extract
 
-1. 将包含隐藏信息的文本粘贴到"解密输入区"
-2. 点击【解密提取】
-3. 工具将还原你最初隐藏的文本内容
+1. Paste the text containing hidden information into the "Decrypt Input" area
+2. Click **Decrypt & Extract**
+3. The tool will recover the originally hidden text
 
-### 技术实现
+### Technical Implementation
 
-- 使用 Unicode 中的：
-  - `\u200B`（零宽空格）表示 `0`
-  - `\u200C`（零宽非连接符）表示 `1`
-- 原始文本 → UTF-8 → 二进制 → 零宽字符 → 插入宿主文本中
-- 解密时按上述流程逆推
-- 所有加密/解密操作均在本地浏览器内进行，不存储、不上传任何数据
+- Uses the following Unicode characters:
+  - `\u200B` (zero-width space) to represent `0`
+  - `\u200C` (zero-width non-joiner) to represent `1`
+- Original text -> UTF-8 -> binary -> zero-width characters -> inserted into host text
+- Decryption reverses the above process
+- All encryption / decryption operations are performed locally in the browser with no data stored or uploaded
 
-## 使用许可
+## License
 
 [MIT](https://opensource.org/licenses/MIT) © Guany
