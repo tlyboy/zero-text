@@ -1,0 +1,29 @@
+{
+  "metadata": {
+    "title": "Zero Text",
+    "description": "零宽文本隐写工具 — 将秘密信息隐藏在普通文本中"
+  },
+  "header": {
+    "toggleTheme": "切换深色模式"
+  },
+  "encrypt": {
+    "title": "加密嵌入",
+    "carrierLabel": "载体文本",
+    "carrierPlaceholder": "输入要显示的文本",
+    "secretLabel": "秘密文本",
+    "secretPlaceholder": "输入要隐藏的内容",
+    "button": "加密嵌入",
+    "resultLabel": "加密结果"
+  },
+  "decrypt": {
+    "title": "解密提取",
+    "inputLabel": "解密输入区",
+    "inputPlaceholder": "粘贴含零宽字符的文本",
+    "button": "解密提取",
+    "resultLabel": "解密结果"
+  },
+  "copy": {
+    "success": "已复制到剪贴板",
+    "error": "复制失败"
+  }
+}

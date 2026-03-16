@@ -1,0 +1,29 @@
+{
+  "metadata": {
+    "title": "Zero Text",
+    "description": "Zero-width text steganography tool — hide secret messages in plain text"
+  },
+  "header": {
+    "toggleTheme": "Toggle theme"
+  },
+  "encrypt": {
+    "title": "Encrypt & Embed",
+    "carrierLabel": "Carrier Text",
+    "carrierPlaceholder": "Enter the text to display",
+    "secretLabel": "Secret Text",
+    "secretPlaceholder": "Enter the content to hide",
+    "button": "Encrypt & Embed",
+    "resultLabel": "Encrypted Result"
+  },
+  "decrypt": {
+    "title": "Decrypt & Extract",
+    "inputLabel": "Decrypt Input",
+    "inputPlaceholder": "Paste text containing zero-width characters",
+    "button": "Decrypt & Extract",
+    "resultLabel": "Decrypted Result"
+  },
+  "copy": {
+    "success": "Copied to clipboard",
+    "error": "Copy failed"
+  }
+}
